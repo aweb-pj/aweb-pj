@@ -16,6 +16,7 @@ const config = {
     hot: true,
 
   },
+  devtool: 'source-map',
 
   module: {
     rules: [
