@@ -1,14 +1,25 @@
+/* eslint-disable no-unused-vars */
 'use strict'
 
 import * as THREE from 'three'
 import _ from 'lodash'
 
-let scene, camera, renderer
+let OrbitControls = require('three-orbit-controls')(THREE)
+
+let scene, camera, controls, renderer
 scene = new THREE.Scene()
+renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
+renderer.setSize(window.innerWidth, window.innerHeight)
+
 camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight)
 camera.position.set(3, 4, 5)
 camera.lookAt(new THREE.Vector3(0, 0, 0))
 scene.add(camera)
+
+controls = new OrbitControls(camera, renderer.domElement)
+controls.addEventListener('change', () => {
+  renderer.render(scene, camera)
+})
 
 let regionR = 3
 let cylinderMesh = new THREE.CylinderGeometry(regionR, regionR, 0.05, 1024)
@@ -50,7 +61,5 @@ _.forEach(cubesGenerator(100), (cube) => {
   scene.add(cube)
 })
 
-renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 renderer.render(scene, camera)

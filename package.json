@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.4",
-    "three": "^0.84.0"
+    "three": "^0.84.0",
+    "three-orbit-controls": "^82.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
